@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Comando: npx prisma db push - para criar a tabela no banco de dados
+// Comando: npx prisma dv pull- para atualizar o schema prisma com as tabelas do banco de dados
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+}

@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -14,4 +14,8 @@ model User {
   id Int @id @default(autoincrement())
   name String
   email String @unique
+  status Boolean @default(true)
+  createdAt DateTime @default(now())
+  updated DateTime @updatedAt
+  
 }

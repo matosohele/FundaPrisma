@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
@@ -24,6 +24,8 @@ model User {
   createdAt DateTime @default(now())
   updated DateTime @updatedAt
   posts Post[]
+
+  @@map("users") //mapeia a tabela para
   
 }
 
@@ -32,6 +34,8 @@ model Post {
   title String
   subtitle String?
   content String
-  userId Int
+  userId Int @map("user_id") //Mapeia a coluna para user id
   user User @relation(fields: [userId], references: [id])
+
+  @@map("posrs") // Mapeia a tabela para "posts" no banco de dados
 }

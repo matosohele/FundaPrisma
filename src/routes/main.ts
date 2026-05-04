@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { createUser} from "../services/user"
+import { prisma } from '../libs/prisma'
+import { createUser} from "../services/user";
 export const mainRouter = Router();
 
 mainRouter.get('/ping', (req, res) => {
@@ -7,10 +8,10 @@ mainRouter.get('/ping', (req, res) => {
 });
 
 mainRouter.post('/user', async (req, res) => {
-    const user =  await createUser(
-        'John Doe',
-        'johndoe@example.com'
-       )
+    const user =  await createUser({
+        name: 'John Doe',
+        email: 'johndoe@example.com'
+    });
 
     res.json(user)
 })

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { prisma } from '../libs/prisma'
-import { createUser} from "../services/user";
+import { createUser } from "../services/user";
 export const mainRouter = Router();
 
 mainRouter.get('/ping', (req, res) => {
@@ -8,10 +8,17 @@ mainRouter.get('/ping', (req, res) => {
 });
 
 mainRouter.post('/user', async (req, res) => {
-    const user =  await createUser({
+    const user = await createUser({
         name: 'John Doe',
         email: 'johndoe@example.com'
     });
 
-    res.json(user)
+
+
+    if (user) {
+        res.status(201).json({ user });
+    } else {
+        res.status(400).json({ error: 'Email already exists' });
+    }
+
 })

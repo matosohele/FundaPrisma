@@ -36,3 +36,11 @@ export const createUsers = async (users: Prisma.UserCreateInput[]) => {
         return false
     }
 }
+
+export const getAllUsers = async () => {
+    try {
+        return await prisma.user.findMany({})
+    } catch (error) {
+        console.error('Error fetching users')
+    } return false
+}
